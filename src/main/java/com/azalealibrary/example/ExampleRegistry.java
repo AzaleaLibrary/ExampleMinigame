@@ -1,4 +1,4 @@
-package com.example.plugin;
+package com.azalealibrary.example;
 
 import com.azalealibrary.azaleacore.api.core.MinigameItem;
 import com.azalealibrary.azaleacore.api.core.MinigameTeam;

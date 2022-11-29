@@ -1,4 +1,4 @@
-package com.example.plugin;
+package com.azalealibrary.example;
 
 import com.azalealibrary.azaleacore.foundation.registry.AzaleaRegistry;
 import org.bukkit.plugin.PluginDescriptionFile;

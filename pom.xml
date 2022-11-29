@@ -25,10 +25,6 @@
             <id>papermc</id>
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -48,14 +44,14 @@
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
             <artifactId>MockBukkit-v1.19</artifactId>
-            <version>2.119.3</version>
+            <version>2.133.1</version>
             <scope>test</scope>
         </dependency>
         <!-- AzaleaCore -->
         <dependency>
-            <groupId>com.github.AzaleaLibrary</groupId>
-            <artifactId>AzaleaCore</artifactId>
-            <version>master-SNAPSHOT</version>
+            <groupId>AzaleaLibrary</groupId>
+            <artifactId>azalea-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

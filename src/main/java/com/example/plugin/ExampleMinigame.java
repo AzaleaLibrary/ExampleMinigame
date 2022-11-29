@@ -1,52 +1,37 @@
 package com.example.plugin;
 
-import com.azalealibrary.azaleacore.api.Minigame;
-import com.azalealibrary.azaleacore.api.MinigameProperty;
-import com.azalealibrary.azaleacore.api.WinCondition;
-import com.azalealibrary.azaleacore.broadcast.Broadcaster;
-import com.azalealibrary.azaleacore.broadcast.message.TitleMessage;
-import com.azalealibrary.azaleacore.minigame.MinigameConfiguration;
-import com.google.common.collect.ImmutableList;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
+import com.azalealibrary.azaleacore.foundation.registry.AzaleaRegistry;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
+import org.bukkit.plugin.java.annotation.plugin.ApiVersion;
+import org.bukkit.plugin.java.annotation.plugin.Plugin;
 
-import java.util.List;
+import java.io.File;
 
-public class ExampleMinigame extends Minigame<ExampleRound> {
+@SuppressWarnings("unused")
+@Plugin(name = "ExampleMinigame", version = "1.0")
+@ApiVersion(ApiVersion.Target.v1_13) // compatible with all post-1.13 mc versions
+public final class ExampleMinigame extends JavaPlugin {
 
-    private final MinigameProperty<Location> spawn;
+    public static ExampleMinigame INSTANCE;
 
-    public ExampleMinigame(World world) {
-        this.spawn = MinigameProperty.location("spawn", world.getSpawnLocation()).build();
-    }
+    public ExampleMinigame() {}
 
-    public Location getSpawn() {
-        return spawn.get();
+    public ExampleMinigame(JavaPluginLoader loader, PluginDescriptionFile description, File dataFolder, File file) {
+        super(loader, description, dataFolder, file);
     }
 
     @Override
-    public String getName() {
-        return "ExampleMinigame";
+    public void onLoad() {
+        INSTANCE = this;
     }
 
     @Override
-    public MinigameConfiguration getConfiguration() {
-        return MinigameConfiguration.create(Main.INSTANCE).tickRate(20).build();
+    public void onEnable() {
+        AzaleaRegistry.EVENT_BUS.register(new ExampleRegistry());
     }
 
     @Override
-    public ImmutableList<WinCondition<ExampleRound>> getWinConditions() {
-        return ImmutableList.of(new WinCondition<>(new TitleMessage("No players :("), 123, ExampleRound::allPlayersDead));
-    }
-
-    @Override
-    public ExampleRound newRound(List<Player> players, Broadcaster broadcaster) {
-        return new ExampleRound(players, broadcaster);
-    }
-
-    @Override
-    public List<MinigameProperty<?>> getProperties() {
-        return List.of(spawn);
-    }
+    public void onDisable() {  }
 }

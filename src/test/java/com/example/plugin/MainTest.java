@@ -5,16 +5,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.logging.Level;
-
 class MainTest {
 
-    private Main plugin;
+    private ExampleMinigame plugin;
 
     @BeforeEach
     public void setUp() {
         MockBukkit.mock();
-        plugin = MockBukkit.load(Main.class);
+        plugin = MockBukkit.load(ExampleMinigame.class);
     }
 
     @AfterEach

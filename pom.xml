@@ -62,7 +62,6 @@
 
     <build>
         <finalName>${project.artifactId}-${mc.version}-${project.version}</finalName>
-        <directory>${plugins.dir}</directory>
 
         <plugins>
             <plugin>

@@ -12,6 +12,8 @@ import java.io.File;
 @SuppressWarnings("unused")
 @Plugin(name = "ExampleMinigame", version = "1.0")
 @ApiVersion(ApiVersion.Target.v1_13) // compatible with all post-1.13 mc versions
+@Dependency("AzaleaCore")
+@LoadBefore("AzaleaCore")
 public final class ExampleMinigame extends JavaPlugin {
 
     public static ExampleMinigame INSTANCE;

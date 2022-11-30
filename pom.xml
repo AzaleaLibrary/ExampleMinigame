@@ -8,13 +8,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <mc.version>1.19</mc.version>                       <!-- default mc version -->
-        <plugins.dir>${project.basedir}/out</plugins.dir>   <!-- default output dir -->
+        <mc.version>1.19</mc.version>                                                   <!-- default mc version -->
+        <plugins.dir>${project.basedir}/out</plugins.dir>                               <!-- default output dir -->
+        <file.name>${project.artifactId}-${mc.version}-${project.version}</file.name>   <!-- archived file name -->
     </properties>
 
-    <groupId>AzaleaLibrary</groupId>
-    <artifactId>__PROJ_NAME__</artifactId>
-    <version>__PROJ_VERSION__</version>
+    <groupId>azalealibrary</groupId>
+    <artifactId>example</artifactId>
+    <version>1.0.0</version>
 
     <repositories>
         <repository>
@@ -27,7 +28,7 @@
         </repository>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/AzaleaLibrary/AzaleaCore/</url>
+            <url>https://maven.pkg.github.com/azalealibrary/azaleacore/</url>
         </repository>
     </repositories>
 
@@ -51,10 +52,10 @@
             <version>2.133.1</version>
             <scope>test</scope>
         </dependency>
-        <!-- AzaleaCore -->
+        <!-- azaleacore -->
         <dependency>
-            <groupId>AzaleaLibrary</groupId>
-            <artifactId>azalea-core</artifactId>
+            <groupId>azalealibrary</groupId>
+            <artifactId>azaleacore</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
@@ -68,6 +69,25 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
+            </plugin>
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <!-- comment out before doing manual deployment -->
+                    <execution>
+                        <id>rename-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>rename</goal>
+                        </goals>
+                        <configuration>
+                            <sourceFile>${project.basedir}/target/${file.name}.jar</sourceFile>
+                            <destinationFile>${plugins.dir}/${file.name}.jar</destinationFile>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

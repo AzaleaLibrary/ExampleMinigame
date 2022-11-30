@@ -1,7 +1,6 @@
-package com.example.plugin;
+package com.azalealibrary.example;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import com.azalealibrary.example.ExampleMinigame;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

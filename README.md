@@ -17,5 +17,5 @@ To fully set up the plugin, there are a few preliminary steps to take before ful
 
 #### In *pom.xml*, replace:
 
-* `__PROJ_NAME__` - the project's artifact id (name).
-* `__PROJ_VERSION__` - the project's version (ei `1.0-SNAPSHOT`).
+* `example` - the project's artifact id (name).
+* `1.0.0` - the project's version (ei `1.0-SNAPSHOT`).

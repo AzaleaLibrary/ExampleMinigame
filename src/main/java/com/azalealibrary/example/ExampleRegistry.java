@@ -9,7 +9,7 @@ import com.azalealibrary.azaleacore.foundation.configuration.property.PropertyTy
 import com.azalealibrary.azaleacore.foundation.registry.MinigameIdentifier;
 import com.azalealibrary.azaleacore.foundation.registry.RegistryEvent;
 import com.azalealibrary.azaleacore.round.RoundEvent;
-import com.azalealibrary.azaleacore.round.RoundLifeCycle;
+import com.azalealibrary.azaleacore.round.RoundListener;
 import com.google.common.eventbus.Subscribe;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -17,6 +17,7 @@ import org.bukkit.Sound;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 public class ExampleRegistry {
 
@@ -33,9 +34,9 @@ public class ExampleRegistry {
     public static final WinCondition NO_RED_PLAYERS = new WinCondition(BLUE_TEAM, "No more red players.", 312, minigame -> minigame.getTeams().getAllInTeam(RED_TEAM).isEmpty());
 
     // properties
-    public static final Property<Vector> SPAWN = new Property<>(PropertyType.VECTOR, "spawn", null, true);
-    public static final CollectionProperty<Vector> MOB_SPAWNS = new CollectionProperty<>(PropertyType.VECTOR, "mobSpawns", new ArrayList<>(), false);
-    public static final Property<Integer> RESPAWN_COUNT = new Property<>(PropertyType.INTEGER, "respawnCount", 4, false);
+    public static final Supplier<Property<Vector>> SPAWN = () -> new Property<>(PropertyType.VECTOR, "spawn", null, true);
+    public static final Supplier<CollectionProperty<Vector>> MOB_SPAWNS = () -> new CollectionProperty<>(PropertyType.VECTOR, "mobSpawns", new ArrayList<>(), false);
+    public static final Supplier<Property<Integer>> RESPAWN_COUNT = () -> new Property<>(PropertyType.INTEGER, "respawnCount", 4, false);
 
     public static final MinigameIdentifier EXAMPLE_MINIGAME = new MinigameIdentifier("Example_Minigame");
 
@@ -46,56 +47,30 @@ public class ExampleRegistry {
 
     @Subscribe
     public void registerRounds(final RegistryEvent.Rounds event) {
-        event.register(EXAMPLE_MINIGAME.tag("round_1"), new RoundLifeCycle() {
+        event.register(EXAMPLE_MINIGAME.tag("round"), () -> new RoundListener() {
             @Override
-            public void onSetup(RoundEvent.Setup event) {
+            public void onSetup(RoundEvent event) {
                 System.out.println("onSetup");
             }
 
             @Override
-            public void onStart(RoundEvent.Start event) {
+            public void onStart(RoundEvent event) {
                 System.out.println("onStart");
             }
 
             @Override
-            public void onTick(RoundEvent.Tick event) {
+            public void onTick(RoundEvent event) {
                 System.out.println("onTick");
             }
 
             @Override
-            public void onWin(RoundEvent.Win event) {
+            public void onWin(RoundEvent event) {
                 System.out.println("onWin");
             }
 
             @Override
-            public void onEnd(RoundEvent.End event) {
+            public void onEnd(RoundEvent event) {
                 System.out.println("onEnd");
-            }
-        });
-        event.register(EXAMPLE_MINIGAME.tag("round_2"), new RoundLifeCycle() {
-            @Override
-            public void onSetup(RoundEvent.Setup event) {
-                System.out.println(event.getPhase());
-            }
-
-            @Override
-            public void onStart(RoundEvent.Start event) {
-                System.out.println(event.getPhase());
-            }
-
-            @Override
-            public void onTick(RoundEvent.Tick event) {
-                System.out.println(event.getPhase());
-            }
-
-            @Override
-            public void onWin(RoundEvent.Win event) {
-                System.out.println(event.getPhase());
-            }
-
-            @Override
-            public void onEnd(RoundEvent.End event) {
-                System.out.println(event.getPhase());
             }
         });
     }
@@ -120,8 +95,8 @@ public class ExampleRegistry {
 
     @Subscribe
     public void registerMinigameProperties(final RegistryEvent.Properties event) {
-        event.register(EXAMPLE_MINIGAME.tag("spawn"), SPAWN);
-        event.register(EXAMPLE_MINIGAME.tag("mob_spawns"), MOB_SPAWNS);
-        event.register(EXAMPLE_MINIGAME.tag("respawn_count"), RESPAWN_COUNT);
+        event.register(EXAMPLE_MINIGAME.tag("spawn"), SPAWN::get);
+        event.register(EXAMPLE_MINIGAME.tag("mob_spawns"), MOB_SPAWNS::get);
+        event.register(EXAMPLE_MINIGAME.tag("respawn_count"), RESPAWN_COUNT::get);
     }
 }

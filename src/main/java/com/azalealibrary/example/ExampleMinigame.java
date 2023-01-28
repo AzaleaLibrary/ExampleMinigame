@@ -27,6 +27,6 @@ public final class ExampleMinigame extends JavaPlugin {
     @Override
     public void onLoad() {
         // register our minigame registry
-        AzaleaRegistry.EVENT_BUS.register(new ExampleRegistry());
+        AzaleaRegistry.EVENT_BUS.register(new Registry());
     }
 }

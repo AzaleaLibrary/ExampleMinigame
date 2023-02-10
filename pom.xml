@@ -27,8 +27,8 @@
             <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/azalealibrary/azaleacore/</url>
+            <id>azalea-repo</id>
+            <url>https://azalealibrary.net/releases</url>
         </repository>
     </repositories>
 
@@ -54,9 +54,9 @@
         </dependency>
         <!-- azaleacore -->
         <dependency>
-            <groupId>azalealibrary</groupId>
-            <artifactId>azaleacore</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>azalea-library</groupId>
+            <artifactId>azalea-configuration</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 

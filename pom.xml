@@ -55,7 +55,7 @@
         <!-- azaleacore -->
         <dependency>
             <groupId>azalea-library</groupId>
-            <artifactId>azalea-configuration</artifactId>
+            <artifactId>azalea-core</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
